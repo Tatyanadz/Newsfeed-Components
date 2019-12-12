@@ -58,8 +58,7 @@ function navItems(params) {
     const listItems = document.createElement('li');
     listItems.textContent = menuItems[i];
     unorderList.appendChild(listItems)
-  }
+  };
   
   return menu;
-  
 }
