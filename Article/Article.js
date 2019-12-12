@@ -112,15 +112,14 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
-const articles = document.querySelector('.articles');
+const articles = document.querySelector('.articles')
 
-
-data.forEach(Data => {
-  console.log('create', Data.title)
-  articles.appendChild(createArt(Data.title, Data.date, Data.firstParagraph, Data.secondParagraph. Data.thirdParagraph))
+data.forEach(datas =>{
+  console.log('create', datas.title)
+  articles.appendChild(crtNFComp(datas.title, datas.date, datas.firstParagraph, datas.secondParagraph, datas.thirdParagraph))
 })
 
-function createArt(title, date, firstP, secondP, thirdP) {
+function crtNFComp(title, date, firstP, secondP, thirdP) {
   const article = document.createElement('div');
   const articleTitle = document.createElement('h2');
   const articleDate = document.createElement('p');
@@ -128,7 +127,6 @@ function createArt(title, date, firstP, secondP, thirdP) {
   const secondParagraph = document.createElement('p');
   const thirdParagraph = document.createElement('p');
   const expandButton = document.createElement('span');
-
 
   article.appendChild(articleTitle);
   article.appendChild(articleDate);
@@ -146,10 +144,47 @@ function createArt(title, date, firstP, secondP, thirdP) {
   firstParagraph.textContent = firstP
   secondParagraph.textContent = secondP
   thirdParagraph.textContent = thirdP
-  expandButton.textContent = 'Expand';
+  expandButton.textContent = 'expand';
 
   expandButton.addEventListener('click', e => {
     article.classList.toggle('article-open')
+    
   })
-    return article;
+    return article
 }
+
+
+
+
+const formToJSON_deconstructed = elements => {
+
+  const reducerFunction = (data, element) => {
+
+    data[element.name] = element.value;
+    console.log(JSON.stringify(data));
+
+    return data;
+  };
+
+  const reducerInitialValue = {};
+  console.log('Initial `data` value:', JSON.stringify(reducerInitialValue));
+
+  const formData = [].reduce.call(elements, reducerFunction, reducerInitialValue);
+  console.log(formData)
+  return formData;
+};
+
+const formToJSON = elements => [].reduce.call(elements, (data, element) => {
+      data[element.name] = element.value;
+      console.log(data);
+      return data;
+  
+});
+
+const handleFormSubmit = event => {
+
+  const data = formToJSON(form.elements);
+};
+
+const form = document.querySelector('.contact-form');
+form.addEventListener('submit', handleFormSubmit);
